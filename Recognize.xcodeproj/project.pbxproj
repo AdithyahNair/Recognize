@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		14ED44E2282A7FE800AC99A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ED44E1282A7FE800AC99A3 /* AppDelegate.swift */; };
 		14ED44E4282A7FE800AC99A3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ED44E3282A7FE800AC99A3 /* SceneDelegate.swift */; };
-		14ED44E6282A7FE800AC99A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ED44E5282A7FE800AC99A3 /* ViewController.swift */; };
+		14ED44E6282A7FE800AC99A3 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ED44E5282A7FE800AC99A3 /* ImageViewController.swift */; };
 		14ED44E9282A7FE800AC99A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14ED44E7282A7FE800AC99A3 /* Main.storyboard */; };
 		14ED44EB282A7FE800AC99A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14ED44EA282A7FE800AC99A3 /* Assets.xcassets */; };
 		14ED44EE282A7FE800AC99A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14ED44EC282A7FE800AC99A3 /* LaunchScreen.storyboard */; };
+		14ED44F9282A808F00AC99A3 /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 14ED44F8282A808F00AC99A3 /* Inceptionv3.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		14ED44DE282A7FE800AC99A3 /* Recognize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recognize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14ED44E1282A7FE800AC99A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14ED44E3282A7FE800AC99A3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		14ED44E5282A7FE800AC99A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		14ED44E5282A7FE800AC99A3 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		14ED44E8282A7FE800AC99A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		14ED44EA282A7FE800AC99A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14ED44ED282A7FE800AC99A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14ED44EF282A7FE800AC99A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14ED44F8282A808F00AC99A3 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +60,46 @@
 			children = (
 				14ED44E1282A7FE800AC99A3 /* AppDelegate.swift */,
 				14ED44E3282A7FE800AC99A3 /* SceneDelegate.swift */,
-				14ED44E5282A7FE800AC99A3 /* ViewController.swift */,
-				14ED44E7282A7FE800AC99A3 /* Main.storyboard */,
-				14ED44EA282A7FE800AC99A3 /* Assets.xcassets */,
-				14ED44EC282A7FE800AC99A3 /* LaunchScreen.storyboard */,
+				14ED44FA282A809400AC99A3 /* Model */,
+				14ED44F6282A803100AC99A3 /* View */,
+				14ED44F5282A801500AC99A3 /* Controller */,
+				14ED44F7282A804100AC99A3 /* Supporting Files */,
 				14ED44EF282A7FE800AC99A3 /* Info.plist */,
 			);
 			path = Recognize;
+			sourceTree = "<group>";
+		};
+		14ED44F5282A801500AC99A3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				14ED44E5282A7FE800AC99A3 /* ImageViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		14ED44F6282A803100AC99A3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				14ED44E7282A7FE800AC99A3 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		14ED44F7282A804100AC99A3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				14ED44EA282A7FE800AC99A3 /* Assets.xcassets */,
+				14ED44EC282A7FE800AC99A3 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14ED44FA282A809400AC99A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				14ED44F8282A808F00AC99A3 /* Inceptionv3.mlmodel */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +173,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14ED44E6282A7FE800AC99A3 /* ViewController.swift in Sources */,
+				14ED44E6282A7FE800AC99A3 /* ImageViewController.swift in Sources */,
+				14ED44F9282A808F00AC99A3 /* Inceptionv3.mlmodel in Sources */,
 				14ED44E2282A7FE800AC99A3 /* AppDelegate.swift in Sources */,
 				14ED44E4282A7FE800AC99A3 /* SceneDelegate.swift in Sources */,
 			);
