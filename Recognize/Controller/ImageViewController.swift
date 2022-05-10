@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import CoreML
+import Vision
 
 class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -27,14 +29,20 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        guard let userPickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+        if let userPickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             
-            fatalError("Image picking failed.")
+            imageView.image = userPickedImage
+            
+            guard let ciImage = CIImage(image: userPickedImage) else {
+                
+                fatalError("UIImage not converted to CIImage")
+                
+            }
+            
+            detect(image: ciImage)
             
         }
-        
-        imageView.image = userPickedImage
-        
+    
         imagePicker.dismiss(animated: true, completion: nil)
         
     }
@@ -43,6 +51,33 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         present(imagePicker, animated: true, completion: nil)
 
+    }
+    
+    func detect(image: CIImage) {
+        
+        guard let model = try? VNCoreMLModel(for: .init(contentsOf: Inceptionv3.urlOfModelInThisBundle)) else {
+            
+            fatalError("Model not found.")
+            
+        }
+        
+        let request = VNCoreMLRequest(model: model, completionHandler: nil)
+        
+        let handler = VNImageRequestHandler(ciImage: image)
+        
+        do {
+            
+            try handler.perform([request])
+            
+        } catch {
+            
+            print("Handler cannot perform request.")
+            
+        }
+        
+        
+        
+        
     }
     
 }
