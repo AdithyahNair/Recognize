@@ -21,11 +21,13 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         imagePicker.delegate = self
         
-        imagePicker.sourceType = .photoLibrary
+        imagePicker.sourceType = .camera
         
         imagePicker.allowsEditing = true
 
     }
+    
+    //MARK: - UIImagePickerControllerDelegate Method
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -46,12 +48,16 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         imagePicker.dismiss(animated: true, completion: nil)
         
     }
+    
+    //MARK: - @IBAction func cameraTapped(_ sender: UIBarButtonItem)
 
     @IBAction func cameraTapped(_ sender: UIBarButtonItem) {
         
         present(imagePicker, animated: true, completion: nil)
 
     }
+    
+    //MARK: - detect(image: CIImage)
     
     func detect(image: CIImage) {
         
@@ -61,7 +67,23 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
             
         }
         
-        let request = VNCoreMLRequest(model: model, completionHandler: nil)
+        let request = VNCoreMLRequest(model: model) { request, error in  // this completion handler gets trigger once the handler has performed the request.
+            
+            guard let results = request.results as? [VNClassificationObservation] else {
+                
+                fatalError("Request failed to produce results.")
+                
+            }
+            
+            if let firstResult = results.first {
+                
+                print(results)
+                
+                self.title = firstResult.identifier.contains("hotdog") ? "Is a Hotdog" : "Is not a Hotdog"
+                
+            }
+            
+        }
         
         let handler = VNImageRequestHandler(ciImage: image)
         
@@ -74,10 +96,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
             print("Handler cannot perform request.")
             
         }
-        
-        
-        
-        
+ 
     }
     
 }
